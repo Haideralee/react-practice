@@ -30,9 +30,14 @@ body, .app-wrapper {
   width: 960px;
 }
 
+.form{
+  margin:15px 0 0 0;
+}
+
 .not-complete{
   color: red;
 }
 .complete{
   color: green;
+  text-decoration: line-through;
 }

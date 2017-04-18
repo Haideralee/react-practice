@@ -4,6 +4,8 @@ import logo from './logo.svg';
 import './index.css';
 import List from "./components/List.js";
 import StateLess from "./components/Title.js";
+import NewTask from "./components/NewTask.js";
+import $ from "jquery";
 
 //APP component with passing state in other component.
 class APP extends React.Component{
@@ -12,6 +14,7 @@ class APP extends React.Component{
     this.state = {
       title: "Welcome to React",
       tagLine: "You're in Future",
+      users: [],
       tasks: [
         {task: "Task 0", complete: false},
         {task: "Task 1", complete: false},
@@ -19,7 +22,7 @@ class APP extends React.Component{
         {task: "Task 3", complete: false},
         {task: "Task 4", complete: false}
       ]
-    }
+    };
   }
 
   //App component's method
@@ -28,9 +31,57 @@ class APP extends React.Component{
     var currentTask = holdTasks[index];
     currentTask.complete = !currentTask.complete;
     this.setState({tasks: holdTasks});
+  };
+
+  removeTask = (index, e) => {
+    var holdTasks = this.state.tasks;
+    holdTasks.splice(index, 1);
+    this.setState({tasks: holdTasks});
+  };
+
+  addTask = (e, newTask) => {
+    console.log("newTask : ", newTask);
+    e.preventDefault();
+    var holdTasks = this.state.tasks;
+    //holdTasks.push(newTask);
+    this.setState({tasks: holdTasks.concat(newTask)});
+  };
+
+  updateTask = (index, updateValue) => {
+    var holdTasks = this.state.tasks;
+    var currentTask = holdTasks[index];
+    currentTask["task"] = updateValue;
+    this.setState({tasks: holdTasks});
+  };
+
+  userList = () => {
+    return (
+        <ul>
+          {
+              this.state.users.map( (v, i) => {
+                return (
+                    <li key={v.id}>
+                      {i + " - " + v.name}
+                    </li>
+                )
+              })
+          }
+        </ul>
+    )
+  };
+
+  componentDidMount(){
+    $.ajax({
+      url: 'https://jsonplaceholder.typicode.com/users',
+      success: (res) => {
+        console.log("res : ", res);
+        this.setState({users: res});
+      }
+    })
   }
 
   render(){
+    const { users } = this.state;
     return (
         <div className="app-wrapper">
           <div className="app-header">
@@ -38,13 +89,22 @@ class APP extends React.Component{
             <StateLess title={this.state.title} tagLine={this.state.tagLine} />
           </div>
           <div className="content-wrapper">
+            <NewTask handleSubmit={this.addTask} />
             <ul>
               {
                 this.state.tasks.map((v, i) => {
-                  return <List clickHendler={this.changeStatus} key={i} object={v} index={i} />
+                  return <List
+                        clickHendler={this.changeStatus}
+                        key={i} object={v} index={i}
+                        removeHendler={this.removeTask}
+                        updateHendler={this.updateTask}
+                      />
                 })
               }
             </ul>
+            <hr />
+            <h3> Fetch data from REST API </h3>
+            {users.length && this.userList()}
           </div>
         </div>
     )
