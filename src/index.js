@@ -104,7 +104,7 @@ class APP extends React.Component{
             </ul>
             <hr />
             <h3> Fetch data from REST API </h3>
-            {users.length && this.userList()}
+            {users.length ? this.userList() : <h5> Loading... </h5>}
           </div>
         </div>
     )
