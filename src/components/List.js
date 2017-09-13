@@ -8,9 +8,7 @@ class List extends React.Component{
             editMode: false
         };
         this.renderItem = this.renderItem.bind(this);
-        this.renderForm = this.renderForm.bind(this);
         this.toggle = this.toggle.bind(this);
-        this.updateItem = this.updateItem.bind(this);
     }
 
     renderItem (){
@@ -21,49 +19,44 @@ class List extends React.Component{
                 <span>{this.props.object.complete ? " - Complete" : " - Not Complete"}</span>
                 <button onClick={(e) => {
                         //e.stopPropagation();
+                        this.toggle(this.props.index);
+                    }
+                }> Edit </button>
+                <button onClick={(e) => {
+                        //e.stopPropagation();
                         this.props.clickHendler(this.props.index, e)
                     }
-                }>
-                    {this.props.object.complete ? "Not complete" : "Complete"}
+                }>{this.props.object.complete ? "Not complete" : "Complete"}
                 </button>
                 <button onClick={(e) => {
                         //e.stopPropagation();
                         this.props.removeHendler(this.props.index, e)
                     }
                 }> Delete </button>
-                <button onClick={(e) => {
-                        //e.stopPropagation();
-                        this.toggle();
-                    }
-                }> Edit </button>
             </li>
         )
     };
 
-    renderForm (){
-        return (
-            <form onSubmit={this.updateItem}>
-                <input type="text" ref={(value) => this.input = value} defaultValue={this.props.object.task}/>
-                <button type="submit">Update Item</button>
-            </form>
-        )
-    };
+    toggle (index){
+        const { router } = this.props;
+        router.push({
+            pathname: `/update-task/${index}`,
+            state: {
+                index: this.props.index,
+                detail: this.props.object,
+                handleSubmit: this.props.updateHendler
+            }
+        });
 
-    toggle (){
-        const { editMode } = this.state;
-        this.setState({editMode: !editMode})
-    }
-
-    updateItem (e){
-        e.preventDefault();
-        this.props.updateHendler(this.props.index, this.input.value);
-        this.toggle();
+        //const { editMode } = this.state;
+        //this.setState({editMode: !editMode})
     }
 
     render(){
-        const { editMode } = this.state;
         return (
-            <div> { editMode ? this.renderForm() : this.renderItem() } </div>
+            <div>
+                { this.renderItem() }
+            </div>
         )
     }
 }

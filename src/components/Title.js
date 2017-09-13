@@ -9,6 +9,6 @@ const StateLess = (props) => {
             <span className="tag-line">{props.tagLine}</span>
         </span>
     )
-}
+};
 
 export default StateLess;

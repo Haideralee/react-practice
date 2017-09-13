@@ -6,7 +6,7 @@ body, .app-wrapper {
 
 .app-header {
   background-color: #222;
-  height: 50px;
+  min-height: 50px;
   padding: 5px;
   color: white;
   text-align: center;
@@ -32,12 +32,60 @@ body, .app-wrapper {
 
 .form{
   margin:15px 0 0 0;
+  width: 350px;
 }
-
+.form input, textarea{
+  margin:0 0 10px 0;
+  width: 100%;
+}
+.form textarea{
+  height: 100px;
+}
+.form input[type="checkbox"]{
+  margin:0;
+  width: auto;
+}
 .not-complete{
   color: red;
 }
 .complete{
   color: green;
   text-decoration: line-through;
+}
+
+.nav-wrapper{
+  flex: 1;
+
+}
+.nav-wrapper ul {
+  flex-direction: column;
+  justify-content: space-around;
+  width: 500px;
+  list-style: none;
+}
+.nav-wrapper ul li {
+  align-self: stretch;
+  align-items: stretch;
+  display: inline-flex;
+}
+.nav-wrapper ul li:last-child a{
+  border:none;
+}
+.nav-wrapper ul li a{
+  padding:0 5px;
+  color: #fff;
+  border-right:1px solid #fff ;
+}
+
+.nav-wrapper ul li a.active{
+  color: red;
+}
+
+.search-input{
+  margin:10px 25px;
+}
+.search-input input{
+  padding: 0 5px;
+  width: 350px;
+  line-height: 25px;
 }
