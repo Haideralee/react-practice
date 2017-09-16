@@ -2,6 +2,7 @@ import React from "react";
 
 //import '../index.js';
 import List from "./List.js";
+import { bindFunction } from "../util";
 
 class Main extends React.Component{
     constructor(props){
@@ -10,8 +11,10 @@ class Main extends React.Component{
             searchText: "",
             tasks: props.tasks
         };
-        this.renderForm = this.renderForm.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+
+        bindFunction(['renderForm', 'handleChange'], this);
+        //this.renderForm = this.renderForm.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
     }
 
     renderForm (){

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { bindFunction } from "../util";
 class NewTask extends React.Component{
 
     constructor(props) {
@@ -12,10 +12,12 @@ class NewTask extends React.Component{
             addTaskMsg: false,
             updateTaskMsg: false
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.resetState = this.resetState.bind(this);
-        this.showMsg = this.showMsg.bind(this);
-        this.checkboxChange = this.checkboxChange.bind(this);
+
+        bindFunction(['handleChange', 'resetState', 'showMsg', 'checkboxChange'], this);
+        //this.handleChange = this.handleChange.bind(this);
+        //this.resetState = this.resetState.bind(this);
+        //this.showMsg = this.showMsg.bind(this);
+        //this.checkboxChange = this.checkboxChange.bind(this);
         console.log("props : ", props);
     }
 

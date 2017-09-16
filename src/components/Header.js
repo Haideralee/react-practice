@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import logo from '../logo.svg';
 import StateLess from "./Title.js";
+import { bindFunction } from "../util";
 
 class Header extends React.Component{
     constructor(props) {
@@ -19,11 +20,12 @@ class Header extends React.Component{
             ]
         };
         //bind this ref on methods
-        this.changeStatus = this.changeStatus.bind(this);
-        this.removeTask = this.removeTask.bind(this);
-        this.addTask = this.addTask.bind(this);
-        this.updateTask = this.updateTask.bind(this);
-        this.sendData = this.sendData.bind(this);
+        bindFunction(['changeStatus', 'removeTask', 'addTask', 'updateTask', 'sendData'], this);
+        //this.changeStatus = this.changeStatus.bind(this);
+        //this.removeTask = this.removeTask.bind(this);
+        //this.addTask = this.addTask.bind(this);
+        //this.updateTask = this.updateTask.bind(this);
+        //this.sendData = this.sendData.bind(this);
     }
 
     changeStatus = (index) => {

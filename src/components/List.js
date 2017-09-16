@@ -1,5 +1,5 @@
 import React from "react";
-
+import { bindFunction } from "../util";
 //list component with props
 class List extends React.Component{
     constructor(props) {
@@ -7,8 +7,9 @@ class List extends React.Component{
         this.state = {
             editMode: false
         };
-        this.renderItem = this.renderItem.bind(this);
-        this.toggle = this.toggle.bind(this);
+        bindFunction(['renderItem', 'toggle'], this);
+        //this.renderItem = this.renderItem.bind(this);
+        //this.toggle = this.toggle.bind(this);
     }
 
     renderItem (){
