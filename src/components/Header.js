@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 import logo from '../logo.svg';
 import StateLess from "./Title.js";
@@ -26,6 +26,8 @@ class Header extends React.Component{
         //this.addTask = this.addTask.bind(this);
         //this.updateTask = this.updateTask.bind(this);
         //this.sendData = this.sendData.bind(this);
+
+        console.log("this.props : ", this.props);
     }
 
     changeStatus = (index) => {
@@ -81,14 +83,14 @@ class Header extends React.Component{
                     <StateLess title={this.state.title} tagLine={this.state.tagLine} />
                     <div className="nav-wrapper">
                         <ul>
-                            <li><Link activeClassName="active" to="/task-list"> task list </Link></li>
-                            <li><Link activeClassName="active" to="/add-new-task"> Add New Task </Link></li>
-                            <li><Link activeClassName="active" to="/get-data-from-api"> Get Data From API </Link></li>
+                            <li><NavLink activeClassName="active" to="/task-list"> task list </NavLink></li>
+                            <li><NavLink activeClassName="active" to="/add-new-task"> Add New Task </NavLink></li>
+                            <li><NavLink activeClassName="active" to="/get-data-from-api"> Get Data From API </NavLink></li>
                         </ul>
                     </div>
                 </div>
                 <div className="content-wrapper">
-                    { React.cloneElement(this.props.children, this.sendData()) }
+                    {/* React.cloneElement(this.props.children, this.sendData()) */}
                 </div>
             </div>
         )
