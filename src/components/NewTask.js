@@ -18,7 +18,7 @@ class NewTask extends React.Component{
         //this.resetState = this.resetState.bind(this);
         //this.showMsg = this.showMsg.bind(this);
         //this.checkboxChange = this.checkboxChange.bind(this);
-        console.log("props : ", props);
+        console.log("NewTask props : ", props);
     }
 
     handleChange(stateName, event) {

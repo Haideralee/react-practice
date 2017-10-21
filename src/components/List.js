@@ -1,5 +1,6 @@
 import React from "react";
 import { bindFunction } from "../util";
+
 //list component with props
 class List extends React.Component{
     constructor(props) {
@@ -39,7 +40,20 @@ class List extends React.Component{
     };
 
     toggle (index){
-        const { router } = this.props;
+
+        const { history } = this.props;
+        console.log("this.props : ", this.props);
+        const location = {
+            pathname: `/update-task/${index}`,
+            state:{
+                index: this.props.index,
+                detail: this.props.object,
+                //handleSubmit: this.props.updateHendler
+            }
+        };
+        history.push(location);
+
+        /*const { router } = this.props;
         router.push({
             pathname: `/update-task/${index}`,
             state: {
@@ -47,10 +61,10 @@ class List extends React.Component{
                 detail: this.props.object,
                 handleSubmit: this.props.updateHendler
             }
-        });
+        });*/
 
-        //const { editMode } = this.state;
-        //this.setState({editMode: !editMode})
+        /*const { editMode } = this.state;
+        this.setState({editMode: !editMode})*/
     }
 
     render(){

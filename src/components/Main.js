@@ -39,6 +39,8 @@ class Main extends React.Component{
     }
 
     render(){
+
+        console.log("props in main", this.props)
         return (
             <div className="app-wrapper">
                 <div className="content-wrapper">
@@ -47,7 +49,7 @@ class Main extends React.Component{
                         { (this.state.tasks.length) ?
                             this.state.tasks.map((v, i) => {
                                 return <List
-                                    router={this.props.router}
+                                    history={this.props.history}
                                     clickHendler={this.props.changeStatus}
                                     key={i} object={v} index={i}
                                     removeHendler={this.props.removeTask}
